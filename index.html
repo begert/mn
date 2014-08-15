@@ -2,56 +2,18 @@
 <html>
   <head>
     <title>HKL</title>
-    <style>
-      #playground {
-        background: black;
-        display: inline-block;
-        border-radius: 10px;
-      }
-      .column {
-        float: left;
-      }
-      .row {
-        clear: left;
-      }
-      .playfield {
-        width: 60px;
-        height: 60px;
-        line-height: 60px;
-        margin: 2px;
-        background: black;
-        text-align: center;
-        font-family: monospace;
-        font-size: 24pt;
-        font-weight: bold;
-        color: white;
-        border-radius: 5px;
-        border: white 1px solid;
-      }
-      .horizontal-arrow-container {
-        text-align: center;
-        height:20px
-      }
-      .vertical-arrow-container {
-        margin: 0px;
-        height: 240px;
-      }  
-      .vertical-arrow-container canvas {
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-    </style>
+    <link rel="stylesheet" media="all" href="mn.css" />
+    <script src="mn.js"></script>
   </head>
   <body>
 
     <div id="playground">
-      <a href="#" onclick="move('north')">
+      <a href="#" onclick="Game.move('north')">
         <div class="row horizontal-arrow-container">
           <canvas id="north" width="20" height="20"></canvas>
         </div>
       </a>
-      <a href="#" onclick="move('west')">
+      <a href="#" onclick="Game.move('west')">
         <div class="column vertical-arrow-container">
           <canvas id="west" width="20" height="20"></canvas>
         </div>
@@ -80,58 +42,19 @@
         <div id="field_4_3" class="playfield"></div>
         <div id="field_4_4" class="playfield"></div>
       </div>
-      <a href="#" onclick="move('east')">
+      <a href="#" onclick="Game.move('east')">
         <div class="column vertical-arrow-container">
           <canvas id="east" width="20" height="20"></canvas>
         </div>
       </a>
-      <a href="#" onclick="move('south')">
+      <a href="#" onclick="Game.move('south')">
         <div class="row horizontal-arrow-container">
           <canvas id="south" width="20" height="20"></canvas>
         </div>
       </a>
     </div>
 
-    <script>
-      var init = function() {
-        placeRandom();
-        placeRandom();
-      }
-
-      var move = function(dir) {
-        alert(dir);
-      }
-
-      var placeRandom = function() {
-        var row = Math.floor((Math.random() * 4) + 1);
-        var col = Math.floor((Math.random() * 4) + 1);
-        var num = Math.floor((Math.random() * 2) + 1) * 2;
-        sel(row,col).innerHTML = "" + num;
-      }
-
-      var sel = function(col, row) {
-        return document.getElementById('field_' + col + '_' + row);
-      }
-
-      var drawTriangle = function(canvas, x1, y1, x2, y2, x3, y3) {
-        var c = document.getElementById(canvas); 
-        var ctx = c.getContext("2d");
-        ctx.fillStyle = "#FFFFFF";
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.lineTo(x3, y3);
-        ctx.closePath();
-        ctx.fill();
-      }
-
-      drawTriangle("north", 10, 5, 20, 15, 0, 15);
-      drawTriangle("south", 0, 5, 10, 15, 20, 5);
-      drawTriangle("west", 5, 10, 15, 0, 15, 20);
-      drawTriangle("east", 5, 0, 15, 10, 5, 20);
-
-      init();
-    </script>
+    <p><a href="#" onclick="Game.placeRandom()">placeRandom()</a></p>
   </body>
 </html>
 
